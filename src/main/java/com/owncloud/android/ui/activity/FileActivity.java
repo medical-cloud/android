@@ -293,6 +293,9 @@ public abstract class FileActivity extends DrawerActivity
      * @return  Main {@link OCFile} handled by the activity.
      */
     public OCFile getFile() {
+        if (getShareFileFragment() != null) {
+            return getShareFileFragment().getFile();
+        }
         return mFile;
     }
 
@@ -762,18 +765,10 @@ public abstract class FileActivity extends DrawerActivity
                 sharingFragment.onUpdateShareInformation(result, getFile());
             }
         } else if (sharingFragment != null && sharingFragment.getView() != null) {
-            String errorResponse;
-
-            if (result.getData() != null && result.getData().size() > 0) {
-                errorResponse = result.getData().get(0).toString();
-            } else {
-                errorResponse = "";
-            }
-
-            if (!TextUtils.isEmpty(errorResponse)) {
-                snackbar = Snackbar.make(sharingFragment.getView(), errorResponse, Snackbar.LENGTH_LONG);
-            } else {
+            if (TextUtils.isEmpty(result.getMessage())) {
                 snackbar = Snackbar.make(sharingFragment.getView(), defaultError, Snackbar.LENGTH_LONG);
+            } else {
+                snackbar = Snackbar.make(sharingFragment.getView(), result.getMessage(), Snackbar.LENGTH_LONG);
             }
 
             ThemeUtils.colorSnackbar(this, snackbar);
