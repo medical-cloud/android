@@ -81,7 +81,7 @@ public class CreateFolderDialogFragment
         AlertDialog alertDialog = (AlertDialog) getDialog();
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(color);
-        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(color);
+        alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(color);
     }
 
     @NonNull
@@ -105,7 +105,7 @@ public class CreateFolderDialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(v)
                 .setPositiveButton(R.string.folder_confirm_create, this)
-                .setNegativeButton(R.string.common_cancel, this)
+                .setNeutralButton(R.string.common_cancel, this)
                 .setTitle(R.string.uploader_info_dirname);
         AlertDialog d = builder.create();
 
